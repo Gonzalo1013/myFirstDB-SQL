@@ -14,13 +14,13 @@ const knex = require('knex')({
 knex.schema.createTableIfNotExists('products', (table) => {
     table.increments('id').primary();
     table.string('title')
-    table.string('description')
-    table.integer('price') //ojo aca con el integer 
-    table.integer('stock')
+    // table.string('description')
+    table.string('price') //ojo aca con el integer 
+    // table.string('stock')
     table.string('thumbnail')
 })
 .then(()=>{
-    console.log("created table");
+    console.log("created table products knex");
 })
 .catch((err) => {
     throw err;
@@ -28,25 +28,25 @@ knex.schema.createTableIfNotExists('products', (table) => {
 
 
 // Base de datos con SQL y sqlite3
-const knexSqlite = require('knex')({
+const knexSQLite = require('knex')({
     client: 'sqlite3',
     connection: {
-        filename: './db/mensajes.sqlite',
+        filename: './db/message.sqlite'
     },
     useNullAsDefault: true,
 })
 
-knexSqlite.schema.createTableIfNotExists('mensajes', (table) => {
+knexSQLite.schema.createTableIfNotExists('message', (table) => {
     table.string('user');
     table.string('time').primary();
     table.string('message');
 })
 .then(()=>{
-    console.log("created table");
+    console.log("created table sqlite");
 })
 .catch((err) => {
     throw err;
 })
 
 
-module.exports = { knex , knexSqlite };
+module.exports = { knex , knexSQLite };
